@@ -1,17 +1,11 @@
 #include <stdio.h>
 #include <time.h>
+#include "main.h"
 
 /*
 My personal implementations of some sorting algorithms in C
 The main goal was to write standalone sorting functions and to compare their efficiency
 */
-
-void setArray(int array[], int arrayReference[], int arrayLength);
-void bubbleSort(int array[], int length);
-void insertSort(int array[], int length);
-void selectSort(int array[], int length);
-void quickSort(int array[], int left, int right);
-void mergeSort(int array[], int left, int right);
 
 int main() {
     clock_t time;
