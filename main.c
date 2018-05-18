@@ -3,7 +3,7 @@
 
 /*
 My personal implementations of some sorting algorithms in C
-The main goal was to write sorting functions which do not require any helper functions
+The main goal was to write standalone sorting functions and to compare their efficiency
 */
 
 void setArray(int array[], int arrayReference[], int arrayLength);
@@ -68,6 +68,17 @@ int main() {
         printf("%d\n", array[i]);
     }
 
+    setArray(array, arrayReference, arrayLength);
+    time = clock();
+    mergeSort(array, 0, (arrayLength - 1));
+    time = clock() - time;
+    time_taken = ((double) time) / CLOCKS_PER_SEC;
+    printf("\nMergeSort hat %f Sekunden gebraucht\n", time_taken);
+    printf("Per MergeSort sortiert:\n");
+    for (int i = 0; i < arrayLength; i++) {
+        printf("%d\n", array[i]);
+    }
+
     return 0;
 }
 
@@ -79,8 +90,9 @@ void setArray(int array[], int arrayReference[], int arrayLength) {
 
 void bubbleSort(int array[], int length) {
     int i, j, cache;
-    for (i = 0; i < (length - 1); i++) {
-        for (j = 0; j < (length - 1); j++) {
+    int n = length - 1;
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
             if (array[j] > array[j + 1]) {
                 cache = array[j];
                 array[j] = array[j + 1];
@@ -105,7 +117,8 @@ void insertSort(int array[], int length) {
 
 void selectSort(int array[], int length) {
     int i, j, curMinIndex, cache;
-    for (i = 0; i < (length - 1); i++) {
+    int n = length - 1;
+    for (i = 0; i < n; i++) {
         curMinIndex = i;
         for (j = i + 1; j < length; j++) {
             if (array[j] < array[curMinIndex]) {
@@ -157,9 +170,40 @@ void quickSort(int array[], int left, int right) {
 }
 
 void mergeSort(int array[], int left, int right) {
-    int middle = (right + left) / 2;
-    if ((right + left) % 2 == 0) {
+    if (right > left) {
+        int middle = (right + left) / 2;
+        mergeSort(array, left, middle);
+        mergeSort(array, (middle + 1), right);
 
+        int i, j, k;
+        int n1 = middle - left + 1;
+        int n2 =  right - middle;
+
+        int L[n1], R[n2];
+        for (i = 0; i < n1; i++) {
+            L[i] = array[left + i];
+        }
+        for (j = 0; j < n2; j++) {
+            R[j] = array[middle + 1 + j];
+        }
+
+        i = 0;
+        j = 0;
+        k = left;
+        while (i < n1 && j < n2) {
+            if (L[i] <= R[j]) {
+                array[k++] = L[i++];
+            } else {
+                array[k++] = R[j++];
+            }
+        }
+
+        while (i < n1) {
+            array[k++] = L[i++];
+        }
+
+        while (j < n2) {
+            array[k++] = R[j++];
+        }
     }
-    int arrA[] =
 }
