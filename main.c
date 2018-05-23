@@ -135,11 +135,9 @@ void quickSort(int array[], int left, int right) {
     int cacheHigh[right - left];
     for (i = left; i < right; i++) {
         if (array[i] > array[right]) {
-            cacheHigh[lengthHigh] = array[i];
-            lengthHigh++;
+            cacheHigh[lengthHigh++] = array[i];
         } else {
-            cacheLow[lengthLow] = array[i];
-            lengthLow++;
+            cacheLow[lengthLow++] = array[i];
         }
     }
 
