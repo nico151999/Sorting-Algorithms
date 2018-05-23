@@ -141,16 +141,13 @@ void quickSort(int array[], int left, int right) {
         }
     }
 
-    if (lengthLow != 0) {
-        for (i = 0; i < lengthLow; i++) {
-            array[i + left] = cacheLow[i];
-        }
+    for (i = 0; i < lengthLow; i++) {
+        array[i + left] = cacheLow[i];
     }
+
     array[lengthLow + left] = array[right];
-    if (lengthHigh != 0) {
-        for (i = 0; i < lengthHigh; i++) {
-            array[i + lengthLow + 1 + left] = cacheHigh[i];
-        }
+    for (i = 0; i < lengthHigh; i++) {
+        array[i + lengthLow + 1 + left] = cacheHigh[i];
     }
     if (lengthLow > 1) {
         quickSort(array, left, (left + lengthLow - 1));
